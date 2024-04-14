@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "engines": {
-    "node":"20.x"
+    "node": "20.x"
   },
   "scripts": {
     "start": "node ./bin/www"
@@ -21,6 +21,7 @@
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.30.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "uglify-js": "^3.17.4"
   }
 }
