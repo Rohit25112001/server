@@ -35,9 +35,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const corsConfig = {
-  origin: 'https://rentmojo-eight.vercel.app/',
+  origin: 'https://rentmojo-eight.vercel.app',
   credentials: true,
-  methods:["GET","POST","PUT","DELETE"]
+  methods: ["GET", "POST", "PUT", "DELETE"]
 }
 app.options("",cors(corsConfig))
 app.use(cors(corsConfig))
