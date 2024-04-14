@@ -58,12 +58,14 @@ const login = async (req, res) => {
             httpOnly:true,
             maxAge:604800000,
             secure:true,
+            sameSite: "None"
         })
     
         res.cookie('at',at,{
             httpOnly:true,
             maxAge:900000,
-            secure:true
+            secure:true,
+            sameSite: "None"
         })
         const currentTime = moment();
         currentTime.add(12, 'minutes');
