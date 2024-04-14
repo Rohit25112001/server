@@ -5,9 +5,10 @@ router.get('/', async(req, res, next) => {
     try{
         const token = await req.cookies['at'];
         
-        if(!token) return res.status(401).json({success:false})
+        if(token) return next();
 
-        next();
+        // res.clearCookie('rt');
+        res.status(401).json({success:false})
     }
 
     catch(err){

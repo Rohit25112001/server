@@ -8,14 +8,19 @@ var logger = require('morgan');
 const cors = require("cors")
 
 const auth = require('./routes/auth.router.js');
-// const admin = require('./routes/admin.route.js')
-// const product = require('./routes/product.route.js')
 const product = require('./routes/product.route.js');
 const verifyToken = require('./routes/verifyToken.route.js');
 const accessTokenRenew = require('./routes/access.route.js');
+const ipcheck = require('./routes/ipcheck.route.js');
+const test = require('./routes/test.route.js');
+//admin
+const admin = require('./routes/admin-auth.route.js');
+const verifyAdmin = require('./routes/verify-admin.routes.js')
+const admin_access_token = require('./routes/admin-at-gen.route.js');
 
 //middleware
 const session = require('./middleware/session.middleware.js')
+const checkIp = require('./middleware/checkip.middleware.js');
 
 var app = express();
 
@@ -34,11 +39,22 @@ app.use(cors({
   credentials: true
 }))
 
+// app.options('*', cors());
+app.use('/test', test);
 app.use('/auth', auth);
 // app.use('/admin', admin);
 app.use('/product', product);
+
+//user
 app.use('/verify-token', session, verifyToken);
 app.use('/access-token',session, accessTokenRenew);
+
+//admin
+app.use('/ipcheck',ipcheck);
+app.use('/admin',admin);
+app.use('/admin-verify',verifyAdmin);
+app.use('/accessTokenAdmin',admin_access_token);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

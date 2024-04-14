@@ -3,35 +3,37 @@ const jwt = require('jsonwebtoken');
 const asTemporary = 15 * 60; // 15 Minutes
 const asPermanent = "7d";
 
-const getPayload = (user) => {
-    return {
-        id: user._id,
-        fullname: user.fullname,
-        email: user.email,
-        mobile: String(user.mobile).replace(/\d(?=1\d{2})/g, '*'),
-        createdAt: user.createdAt,
-    };
+const getPayload = (admin) =>{
+    return{
+        id:admin._id,
+        username:admin.username,
+        email:admin.email,
+        mobile:admin.mobile 
+        ? String(admin.mobile).replace(/.*(?=\d{2})/, '********') 
+        : null,
+        createdAt:admin.createdAt
+    }
+}
+
+const accessToken = (user, key) => {
+    return jwt.sign(getPayload(user), key, { expiresIn: asTemporary });
 };
 
-const accessToken = (user) => {
-    return jwt.sign(getPayload(user), process.env.SECRET_KEY, { expiresIn: asTemporary });
+const refreshToken = (user, key) => {
+    return jwt.sign(getPayload(user), key, { expiresIn: asPermanent });
 };
 
-const refreshToken = (user) => {
-    return jwt.sign(getPayload(user), process.env.SECRET_KEY, { expiresIn: asPermanent });
-};
-
-const getCookies = (type, user) => {
+const getCookies = (name=['at','rt'], type, key, user) => {
     if (type === 'at' && user) {
-        return { at:accessToken(user) };
+        return { [name[0]]:accessToken(user, key) };
     }
 
     if (type === 'rt' && user) {
-        return { rt:refreshToken(user) };
+        return { [name[1]]:refreshToken(user, key) };
     }
 
     if (type === 'all' && user) {
-        return {at: accessToken(user) , rt: refreshToken(user)}
+        return {[name[0]]: accessToken(user, key) , [name[1]]: refreshToken(user, key)}
     }
 };
 
