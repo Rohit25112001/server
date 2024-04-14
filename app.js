@@ -34,11 +34,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors({
+const corsConfig = {
   origin: '*',
   credentials: true,
   methods:["GET","POST","PUT","DELETE"]
-}))
+}
+app.options("",cors(corsConfig))
+app.use(cors(corsConfig))
 
 // app.options('*', cors());
 app.use('/test', test);
