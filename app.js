@@ -43,7 +43,7 @@ app.options("",cors(corsConfig))
 app.use(cors(corsConfig))
 
 // app.options('*', cors());
-app.use('/test', test);
+// app.use('/test', test);
 app.use('/auth', auth);
 // app.use('/admin', admin);
 app.use('/product', product);
