@@ -58,14 +58,12 @@ const login = async (req, res) => {
             httpOnly:true,
             maxAge:604800000,
             secure:true,
-            domain: '.rentmojo-eight.vercel.app'
         })
     
         res.cookie('at',at,{
             httpOnly:true,
             maxAge:900000,
-            secure:true,
-            domain: '.rentmojo-eight.vercel.app'
+            secure:true
         })
         const currentTime = moment();
         currentTime.add(12, 'minutes');
