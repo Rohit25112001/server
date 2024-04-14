@@ -36,8 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const corsConfig = {
   origin: 'https://rentmojo-eight.vercel.app',
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"]
+  credentials: true
 }
 
 app.options("",cors(corsConfig))
@@ -50,7 +49,7 @@ app.use('/auth', auth);
 app.use('/product', product);
 
 //user
-app.use('/verify-token',  verifyToken);
+app.use('/verify-token', session, verifyToken);
 app.use('/access-token',session, accessTokenRenew);
 
 //admin
