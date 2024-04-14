@@ -3,13 +3,12 @@ const router = express.Router();
 
 router.get('/', async(req, res, next) => {
     try{
-        // const token = await req.cookies['at'];
+        const token = await req.cookies['at'];
         
-        // if(token) return next();
+        if(token) return next();
 
-        // // res.clearCookie('rt');
-        // res.status(401).json({success:false})
-        next();
+        // res.clearCookie('rt');
+        res.status(401).json({success:false})
     }
 
     catch(err){
