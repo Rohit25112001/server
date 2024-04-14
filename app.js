@@ -50,7 +50,7 @@ app.use('/auth', auth);
 app.use('/product', product);
 
 //user
-app.use('/verify-token', session, verifyToken);
+app.use('/verify-token',  verifyToken);
 app.use('/access-token',session, accessTokenRenew);
 
 //admin
