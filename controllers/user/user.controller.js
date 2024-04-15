@@ -38,6 +38,7 @@ const login = async (req, res) => {
         res.cookie('testing','hello',{
             httpOnly:true,
                 maxAge:604800000,
+                sameSite:'none',
                 secure:true
         })
         res.status(200).json({data:user})
