@@ -11,7 +11,7 @@ const userModel = new mongoose.Schema({
 })
 
 userModel.pre('save',async function(next){
-    const existingUser = await User.findOne({ email: this.email.toLowerCase() });
+    const existingUser = await User.findOne({ email: this.email });
     
     if(!existingUser) return next();
     
