@@ -54,31 +54,24 @@ const login = async (req, res) => {
         const session = jwt.sign(payload(user),process.env.DATA_SECRET_KEY);
         const {at , rt} = getCookies(undefined, 'all', process.env.DATA_SECRET_KEY ,user); // calling from cookie module
 
-        const options = {
-            httpOnly: true,
-            secure: true,
-        }
-
-        // res.cookie('rt',rt,{
-        //     httpOnly:true,
-        //     sameSite:'none',
-        //     secure:true
-        // })
+        res.cookie('rt',rt,{
+            httpOnly:true,
+            maxAge:604800000,
+            sameSite:'none',
+            secure:true
+        })
     
-        // res.cookie('at',at,{
-        //     httpOnly:true,
-        //     sameSite:'none',
-        //     secure:true
-        // })
+        res.cookie('at',at,{
+            httpOnly:true,
+            maxAge:900000,
+            sameSite:'none'
+            secure:true
+        })
         const currentTime = moment();
         currentTime.add(12, 'minutes');
         const current_time = btoa(currentTime);
         console.log(current_time);
-
-        res.status(200)
-        .cookie('at',at,options)
-        .cookie('rt',rt,options).
-        json({data:session,time:current_time})
+        res.status(200).json({data:session,time:current_time})
     }
     catch(err){
         console.log(err);
