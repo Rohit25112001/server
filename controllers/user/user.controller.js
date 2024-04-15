@@ -44,7 +44,7 @@ const login = async (req, res) => {
         res.status(200).json({data:user})
     }
     catch(err){
-        res.status(400).json({message:err.message})
+        res.status(400).json({message:err.message,error:JSON.stringify(err)})
     }
     // try{
     //     const user = await User.findOne({email:req.query.email},{createdAt:0,updatedAt:0,__v:0});
