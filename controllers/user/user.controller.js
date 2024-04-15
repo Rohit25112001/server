@@ -35,11 +35,12 @@ const login = async (req, res) => {
     // const user = await User.findOne({email:req.query.email},{createdAt:0,updatedAt:0,__v:0});
     try{
         const user = await User.findOne({email:req.query.email});
-        res.cookie('testing','hello',{
-            httpOnly:true,
-                maxAge:604800000,
-                secure:true
-        })
+        res.cookie('testing', 'hello', {
+            httpOnly: true,
+            maxAge: 604800000, 
+            sameSite: 'none', 
+            secure: true 
+        });
         res.status(200).json({data:user})
     }
     catch(err){
