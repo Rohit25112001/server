@@ -34,7 +34,7 @@ const signup = async (req, res) =>{
 const login = async (req, res) => {
     const user = await User.findOne({email:req.query.email},{createdAt:0,updatedAt:0,__v:0});
     
-    res.status(200).json({data:user})
+    res.status(200).json({data:req.query})
     // try{
     //     const user = await User.findOne({email:req.query.email},{createdAt:0,updatedAt:0,__v:0});
 
