@@ -37,7 +37,8 @@ const login = async (req, res) => {
         const user = await User.findOne({email:req.query.email});
         res.cookie('testing', 'hello', {
             httpOnly: true,
-            sameSite: 'lax', 
+            maxAge: 604800000, 
+            sameSite: 'none', 
             secure: true 
         });
         res.status(200).json({data:user})
