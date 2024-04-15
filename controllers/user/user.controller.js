@@ -56,7 +56,6 @@ const login = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            sameSite: 'none',
             secure: true,
         }
 
@@ -75,6 +74,7 @@ const login = async (req, res) => {
         currentTime.add(12, 'minutes');
         const current_time = btoa(currentTime);
         console.log(current_time);
+
         res.status(200)
         .cookie('at',at,options)
         .cookie('rt',rt,options).
