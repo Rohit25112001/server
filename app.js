@@ -39,7 +39,6 @@ const corsConfig = {
   credentials: true
 }
 
-app.options("",cors(corsConfig))
 app.use(cors(corsConfig))
 
 // app.options('*', cors());
