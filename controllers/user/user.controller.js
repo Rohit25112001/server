@@ -15,13 +15,15 @@ const signup = async (req, res) =>{
         res.cookie('rt',rt,{
             httpOnly:true,
             maxAge:604800000,
-            secure:true
+            secure:true,
+            sameSite:'none'
         })
     
         res.cookie('at',at,{
             httpOnly:true,
             maxAge:900000,
-            secure:true
+            secure:true,
+            sameSite:'none'
         })
     
         res.status(200).json({success:true})
